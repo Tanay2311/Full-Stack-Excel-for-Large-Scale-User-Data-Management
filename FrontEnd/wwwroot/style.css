@@ -1,0 +1,320 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 10px;
+  padding: 0;
+}
+
+#upload-form {
+  margin-bottom: 20px;
+}
+
+#upload-button {
+  color: rgba(0, 80, 64, 0.692);
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.397);
+  background: rgba(255, 255, 255, 0.068);
+  overflow: hidden;
+  font-size: 0.9rem;
+  font-weight: 600;
+  gap: 8px;
+  border-radius: 5px;
+  margin: 0 5px;
+  transition: 0.2s;
+  border: 1px solid transparent;
+}
+
+#upload-button:hover {
+  border-color: rgba(255, 255, 255, 0.623);
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 225, 255, 0.144),
+    rgba(114, 204, 222, 0.247),
+    rgba(196, 235, 236, 0.39)
+  );
+  box-shadow: 0 6px rgba(255, 255, 255, 0.623);
+  transform: translateY(-6px);
+}
+
+#upload-button:active {
+  transform: translateY(2px);
+  box-shadow: none;
+}
+
+
+#up {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  margin-top: 20px;
+}
+
+#choose {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  margin-top: 20px;
+}
+
+#fin {
+  justify-content: right;
+  margin-top: 50px;
+}
+
+#file-name {
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  margin-left: 10px;
+}
+
+.Documents-btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: fit-content;
+  height: 45px;
+  border: none;
+  padding: 0px 15px;
+  border-radius: 5px;
+  background-color: rgb(49, 49, 83);
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.folderContainer {
+  width: 40px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.fileBack {
+  z-index: 1;
+  width: 80%;
+  height: auto;
+}
+
+.filePage {
+  width: 50%;
+  height: auto;
+  position: absolute;
+  z-index: 2;
+  transition: all 0.3s ease-out;
+}
+
+.fileFront {
+  width: 85%;
+  height: auto;
+  position: absolute;
+  z-index: 3;
+  opacity: 0.95;
+  transform-origin: bottom;
+  transition: all 0.3s ease-out;
+}
+
+.text {
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.Documents-btn:hover .filePage {
+  transform: translateY(-5px);
+}
+
+.Documents-btn:hover {
+  background-color: rgb(58, 58, 94);
+}
+
+.Documents-btn:active {
+  transform: scale(0.95);
+}
+
+.Documents-btn:hover .fileFront {
+  transform: rotateX(30deg);
+}
+
+#file-input {
+  display: none;
+}
+
+#spreadsheet-container {
+  position: absolute;
+  height: calc(100vh - 150px); 
+  overflow: scroll;
+  border: 2px solid #000000;
+}
+
+#spreadsheet-canvas {
+  position: relative;
+  width: 100%;
+}
+
+#footer-bar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #f1f1f1;
+  text-align: center;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+}
+
+.find-replace {
+  position: relative;
+  background-color: transparent;
+  color: #000000;
+  font-size: 17px;
+  font-weight: 600;
+  border-radius: 10px;
+  width: 150px;
+  height: 60px;
+  border: none;
+  text-transform: uppercase;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(51, 51, 51, 0.2);
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.find-replace::before {
+  content: "Replace!";
+  color: #e8e8e8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: linear-gradient(135deg, #7b4397, #dc2430);
+  transform: translate(0%, 90%);
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.find-replace::after {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f4ebeb;
+  color: #333;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  transform-origin: top;
+  transform: translate(0%, -100%);
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.find-replace:hover::before {
+  transform: translate(0%, 0%);
+}
+
+.find-replace:hover::after {
+  transform: translate(0%, -200%);
+}
+
+.find-replace:focus {
+  outline: none;
+}
+
+.find-replace:active {
+  transform: scale(0.95);
+}
+
+/* Container for the search elements */
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+/* Styles for the search input */
+#search-input {
+  flex: 0.3;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 80px;
+  font-size: 14px;
+}
+
+/* Styles for the column selection dropdown */
+#search-column {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: white;
+}
+
+/* Container for the toggle switch */
+.toggle-container {
+  --knob-size: 1em;
+  position: relative;
+  width: 3em;
+  height: 1.5em;
+}
+
+/* Hide the default checkbox */
+.toggle-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The switch base */
+.toggle-base {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+/* The switch handle */
+.toggle-base:before {
+  position: absolute;
+  content: "";
+  height: var(--knob-size);
+  width: var(--knob-size);
+  left: 0.25em;
+  bottom: 0.25em;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+/* Checked state */
+.toggle-input:checked + .toggle-base {
+  background-color: #2196F3;
+}
+
+.toggle-input:checked + .toggle-base:before {
+  transform: translateX(1.5em);
+}
+
+/* Focus state */
+.toggle-input:focus + .toggle-base {
+  box-shadow: 0 0 1px #2196F3;
+}
